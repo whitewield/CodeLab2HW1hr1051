@@ -6,15 +6,16 @@ namespace Global {
 
 
 	public enum Symbol {
-		Green,
-		Red,
-		Blue,
-		Yellow
+		A,
+		B,
+		X,
+		Y
 	}
 
 	public static class GlobalInfo {
 
 		public const int DISTANCE_SYMBOL = 1;
+		public const int NUMBER_MAX_SEED = 1000000;
 	}
 }
 
