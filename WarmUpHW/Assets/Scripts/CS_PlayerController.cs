@@ -20,6 +20,7 @@ public class CS_PlayerController : MonoBehaviour {
 
 	private bool isWinning = false;
 	private float myTimer = 0;
+	[SerializeField] TextMesh myTimerTextMesh;
 	// Use this for initialization
 	void Awake () {
 		
@@ -40,6 +41,7 @@ public class CS_PlayerController : MonoBehaviour {
 		myCurrentSymbol = myPatternManager.GetMySymbol (myCurrentIndex).GetComponent<CS_Symbol> ().GetSymbol ();
 
 		myTimer = 0;
+		myTimerTextMesh.text = "0";
 	}
 	
 	// Update is called once per frame
@@ -52,6 +54,7 @@ public class CS_PlayerController : MonoBehaviour {
 
 		if (myCurrentIndex != 0) {
 			myTimer += Time.deltaTime;
+			myTimerTextMesh.text = myTimer.ToString ("##.###");
 		}
 		
 		if ((JellyJoystickManager.Instance.GetButton (ButtonMethodName.Down, myController, JoystickButton.A) && myCurrentSymbol == Symbol.A) ||
