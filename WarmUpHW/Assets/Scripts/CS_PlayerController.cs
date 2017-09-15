@@ -28,9 +28,16 @@ public class CS_PlayerController : MonoBehaviour {
 
 	void Start () {
 
+	}
+
+	public void Init (int g_controller, int g_patternSize, int g_seed) {
+		myController = g_controller;
+
 		myPatternManagerTransform = ((GameObject)Instantiate (myPatternManagerPrefab, this.transform)).transform;
 		myPatternManagerTransform.localPosition = Vector3.zero;
 		myPatternManager = myPatternManagerTransform.GetComponent<CS_PatternManager> ();
+
+		myPatternManager.SetRandomSeed (g_seed);
 
 		//test
 

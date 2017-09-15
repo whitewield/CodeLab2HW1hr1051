@@ -15,6 +15,8 @@ public class CS_PatternManager : MonoBehaviour {
 	public void SetRandomSeed (int g_seed) {
 		if (g_seed >= GlobalInfo.NUMBER_MAX_SEED) {
 			myRandomSeed = -1;
+		} else {
+			myRandomSeed = g_seed;
 		}
 	}
 
