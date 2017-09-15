@@ -21,6 +21,11 @@ public class CS_PlayerController : MonoBehaviour {
 	private bool isWinning = false;
 	private float myTimer = 0;
 	[SerializeField] TextMesh myTimerTextMesh;
+
+	[SerializeField] AudioClip mySFX_Right;
+	[SerializeField] AudioClip mySFX_Wrong;
+	[SerializeField] AudioClip mySFX_Win;
+
 	// Use this for initialization
 	void Awake () {
 		
@@ -65,13 +70,20 @@ public class CS_PlayerController : MonoBehaviour {
 		}
 		
 		if ((JellyJoystickManager.Instance.GetButton (ButtonMethodName.Down, myController, JoystickButton.A) && myCurrentSymbol == Symbol.A) ||
-			(JellyJoystickManager.Instance.GetButton (ButtonMethodName.Down, myController, JoystickButton.B) && myCurrentSymbol == Symbol.B) ||
-			(JellyJoystickManager.Instance.GetButton (ButtonMethodName.Down, myController, JoystickButton.X) && myCurrentSymbol == Symbol.X) ||
-			(JellyJoystickManager.Instance.GetButton (ButtonMethodName.Down, myController, JoystickButton.Y) && myCurrentSymbol == Symbol.Y)) {
+		    (JellyJoystickManager.Instance.GetButton (ButtonMethodName.Down, myController, JoystickButton.B) && myCurrentSymbol == Symbol.B) ||
+		    (JellyJoystickManager.Instance.GetButton (ButtonMethodName.Down, myController, JoystickButton.X) && myCurrentSymbol == Symbol.X) ||
+		    (JellyJoystickManager.Instance.GetButton (ButtonMethodName.Down, myController, JoystickButton.Y) && myCurrentSymbol == Symbol.Y)) {
+
+			CS_AudioManager.Instance.PlaySFX (mySFX_Right);
 
 			myCurrentIndex++;
 			GetCurrentSymbol ();
 			Move ();
+		} else if ((JellyJoystickManager.Instance.GetButton (ButtonMethodName.Down, myController, JoystickButton.A)) ||
+		           (JellyJoystickManager.Instance.GetButton (ButtonMethodName.Down, myController, JoystickButton.B)) ||
+		           (JellyJoystickManager.Instance.GetButton (ButtonMethodName.Down, myController, JoystickButton.X)) ||
+		           (JellyJoystickManager.Instance.GetButton (ButtonMethodName.Down, myController, JoystickButton.Y))) {
+			CS_AudioManager.Instance.PlaySFX (mySFX_Wrong);
 		}
 	}
 
@@ -86,6 +98,7 @@ public class CS_PlayerController : MonoBehaviour {
 	private void GetCurrentSymbol () {
 		if (myCurrentIndex >= myPatternSize) {
 			isWinning = true;
+			CS_AudioManager.Instance.PlaySFX (mySFX_Win);
 			return;
 		}
 			
